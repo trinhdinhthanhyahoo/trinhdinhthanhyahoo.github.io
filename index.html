@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tỏ tình</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffd1ff);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(255, 105, 180, 0.8);
+            }
+        }
+
+        .heart {
+            color: red;
+            font-size: 120px;
+            animation: heartbeat 1.2s infinite, float 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            25% {
+                transform: scale(1.1) rotate(5deg);
+            }
+
+            50% {
+                transform: scale(1.2) rotate(0deg);
+            }
+
+            75% {
+                transform: scale(1.1) rotate(-5deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .message {
+            margin: 30px;
+            font-size: 28px;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 50px;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        #yesBtn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        #noBtn {
+            background: linear-gradient(45deg, #f44336, #e53935);
+            color: white;
+        }
+
+        .success-message {
+            font-size: 32px;
+            color: #333;
+            animation: successPop 0.5s ease-out;
+        }
+
+        @keyframes successPop {
+            0% {
+                transform: scale(0);
+            }
+
+            70% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Hiệu ứng lấp lánh */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: white;
+            pointer-events: none;
+            animation: sparkle 1.5s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1) rotate(180deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Thêm CSS cho cơn lốc trái tim */
+        .heart-tornado {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .tornado-path-1 {
+            animation: tornado1 4s linear infinite;
+        }
+
+        .tornado-path-2 {
+            animation: tornado2 5s linear infinite;
+        }
+
+        .tornado-path-3 {
+            animation: tornado3 6s linear infinite;
+        }
+
+        @keyframes tornado1 {
+            0% {
+                transform: rotate(0deg) translate(100px) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotate(360deg) translate(100px) rotate(-360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        @keyframes tornado2 {
+            0% {
+                transform: rotate(0deg) translate(150px) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotate(-360deg) translate(150px) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        @keyframes tornado3 {
+            0% {
+                transform: rotate(0deg) translate(200px) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotate(360deg) translate(200px) rotate(-360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Hiệu ứng mới cho message thành công */
+        .success-container {
+            position: relative;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            animation: popIn 0.5s ease-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+            }
+
+            70% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* CSS cho chữ bay */
+        .flying-text {
+            position: absolute;
+            font-size: 32px;
+            color: #ff4081;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),
+                0 0 10px rgba(255, 105, 180, 0.5);
+            white-space: nowrap;
+            pointer-events: none;
+            font-weight: bold;
+            z-index: 100;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: appearText 0.5s ease-out forwards;
+        }
+
+        @keyframes appearText {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .final-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+            z-index: 1000;
+            text-align: center;
+            animation: popIn 1s ease-out forwards;
+        }
+
+        .final-message h1 {
+            font-size: 40px;
+            color: #ff1493;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .final-message p {
+            font-size: 24px;
+            color: #ff69b4;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+            }
+
+            70% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .heart-decoration {
+            position: absolute;
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Hiệu ứng gradient cho chữ */
+        .rainbow-text {
+            background: linear-gradient(45deg, #ff0000, #ff69b4, #ff1493, #ff0000);
+            background-size: 200% auto;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: rainbow 2s linear infinite;
+        }
+
+        @keyframes rainbow {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Thêm hiệu ứng bong bóng nổi */
+        .bubble {
+            position: absolute;
+            background: radial-gradient(circle at 50% 50%,
+                    rgba(255, 192, 203, 0.4),
+                    rgba(255, 182, 193, 0.2));
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-bubble 8s linear infinite;
+        }
+
+        @keyframes float-bubble {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="heart">❤️</div>
+        <div class="message">Em có yêu anh không?</div>
+        <div class="buttons">
+            <button id="yesBtn">Có</button>
+            <button id="noBtn">Không</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const message = document.querySelector('.message');
+        const container = document.querySelector('.container');
+
+        // Thêm hiệu ứng lấp lánh
+        function createSparkles() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            container.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1500);
+        }
+
+        setInterval(createSparkles, 300);
+
+        noBtn.addEventListener('mouseover', () => {
+            noBtn.textContent = 'Có';
+            noBtn.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
+        });
+
+        noBtn.addEventListener('mouseout', () => {
+            noBtn.textContent = 'Không';
+            noBtn.style.background = 'linear-gradient(45deg, #f44336, #e53935)';
+        });
+
+        function createContinuousTornado() {
+            const hearts = ['❤️', '💖', '💗', '💓', '💝', '💕'];
+            const container = document.body;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            // Tạo trái tim mới mỗi 100ms
+            setInterval(() => {
+                // Tạo 3 trái tim cho 3 đường xoáy khác nhau
+                for (let i = 1; i <= 3; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = `heart-tornado tornado-path-${i}`;
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+                    // Kích thước ngẫu nhiên
+                    const size = Math.random() * 15 + 15;
+                    heart.style.fontSize = `${size}px`;
+
+                    // Đặt vị trí trung tâm
+                    heart.style.left = `${centerX}px`;
+                    heart.style.top = `${centerY}px`;
+
+                    container.appendChild(heart);
+
+                    // Xóa trái tim sau khi animation kết thúc
+                    setTimeout(() => heart.remove(), i * 2000);
+                }
+            }, 100);
+        }
+
+        function createFlyingText() {
+            const texts = [
+                "Anh yêu em ❤️",
+                "Em là tất cả 💖",
+                "Bên em mãi mãi 💝",
+                "Chỉ có em thôi 💕",
+                "Em là số 1 💘"
+            ];
+
+            let count = 0;
+            const interval = setInterval(() => {
+                if (count >= 8) {
+                    clearInterval(interval);
+                    setTimeout(showFinalMessage, 3000);
+                    return;
+                }
+
+                const text = document.createElement('div');
+                text.className = 'flying-text';
+                text.textContent = texts[Math.floor(Math.random() * texts.length)];
+
+                // Vị trí ngẫu nhiên trên màn hình
+                const startX = 50 + Math.random() * (window.innerWidth - 100);
+                const startY = 50 + Math.random() * (window.innerHeight - 100);
+
+                text.style.left = `${startX}px`;
+                text.style.top = `${startY}px`;
+
+                document.body.appendChild(text);
+
+                // Đợi 1 giây trước khi bay đi
+                setTimeout(() => {
+                    // Hướng bay ngẫu nhiên
+                    const angle = Math.random() * Math.PI * 2;
+                    const finalX = startX + Math.cos(angle) * window.innerWidth;
+                    const finalY = startY + Math.sin(angle) * window.innerHeight;
+
+                    // Thêm transition cho hiệu ứng bay mượt
+                    text.style.transition = 'all 2s ease-in-out';
+                    text.style.transform = 'scale(0.2)';
+                    text.style.opacity = '0';
+                    text.style.left = `${finalX}px`;
+                    text.style.top = `${finalY}px`;
+
+                    // Xóa element sau khi bay xong
+                    setTimeout(() => {
+                        text.remove();
+                    }, 2000);
+                }, 1000);
+
+                count++;
+            }, 1500); // Tạo chữ mới mỗi 1.5 giây
+        }
+
+        function showFinalMessage() {
+            const finalMessage = document.createElement('div');
+            finalMessage.className = 'final-message';
+            finalMessage.innerHTML = `
+                <h1>💝 Anh Yêu Em 💝</h1>
+                <p>Em là điều tuyệt vời nhất</p>
+                <p>Cảm ơn em đã đến với cuộc đời anh</p>
+                <p>Anh muốn được bên em mãi mãi</p>
+                <p>💖 Yêu em thật nhiều 💖</p>
+            `;
+            document.body.appendChild(finalMessage);
+
+            // Thêm trái tim trang trí
+            const decorationHearts = ['❤️', '💖', '💗', '💓', '💝', '💕'];
+            for (let i = 0; i < 12; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-decoration';
+                heart.innerHTML = decorationHearts[Math.floor(Math.random() * decorationHearts.length)];
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(heart);
+            }
+        }
+
+        // Thêm hàm tạo bong bóng
+        function createBubbles() {
+            setInterval(() => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 50 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${Math.random() * 100}%`;
+                document.body.appendChild(bubble);
+
+                setTimeout(() => bubble.remove(), 8000);
+            }, 300);
+        }
+
+        // Cập nhật hàm showLove
+        function showLove() {
+            container.innerHTML = '';
+            createFlyingText();
+            createContinuousTornado();
+            createBubbles();
+            setInterval(createSparkles, 200);
+        }
+
+        noBtn.addEventListener('click', showLove);
+        yesBtn.addEventListener('click', showLove);
+
+        // Thêm hiệu ứng hover cho nút
+        [yesBtn, noBtn].forEach(btn => {
+            btn.addEventListener('mouseover', () => {
+                btn.style.transform = 'scale(1.1) rotate(5deg)';
+                btn.style.boxShadow = '0 0 20px rgba(255, 182, 193, 0.8)';
+            });
+
+            btn.addEventListener('mouseout', () => {
+                btn.style.transform = 'scale(1) rotate(0deg)';
+                btn.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            });
+        });
+    </script>
+</body>
+
+</html>
